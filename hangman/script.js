@@ -1,24 +1,49 @@
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
+const canvas = document.getElementById("hangman-canvas");
+const ctx = canvas.getContext("2d");
+var result;
 
-// Set circle properties
-var x = canvas.width / 2; // Center X coordinate (half of canvas width)
-var y = canvas.height / 2; // Center Y coordinate (half of canvas height)
-var radius = 50; // Circle radius
-var startAngle = 0; // Starting angle (0 for 3 o'clock position)
-var endAngle = Math.PI * 2; // Ending angle for full circle (2 * PI)
+async function fetchNewWord() {
+    const apiUrl = "https://random-word-api.herokuapp.com/word?lang=en";
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    result = data[0]; // assuming data is an array and you want the first word
+}
 
-// Set stroke style (outline)
-ctx.strokeStyle = "blue";
-ctx.lineWidth = 5; // Line width (optional)
+function drawHangingGallow() {
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.lineWidth = 10;
+    // Base
+    ctx.rect(100, 220, 80, 10);
+    // Main pole
+    ctx.rect(135, 10, 10, 210);
+    // Top pole
+    ctx.rect(135, 10, 80, 10);
+    // Knot
+    ctx.rect(215, 10, 10, 30);
+    ctx.fill();
+    ctx.closePath();
+}
 
-// Draw the circle
-ctx.beginPath(); // Begin a new path
-ctx.arc(x, y, radius, startAngle, endAngle);
+function drawLetterPlaceholder() {
+    const startX = 200; // You'll want to adjust this based on canvas size and word length
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "black";
+    ctx.textAlign = "center";
+    const startY = 300;
+    const letterSpacing = 20;
+    for (let i = 0; i < result.length; i++) {
+        ctx.beginPath();
+        ctx.fillRect(startX + i * letterSpacing, startY, 15, 5); // Draws a small rectangle as placeholder
+        ctx.closePath();
+    }
+}
 
-// Choose how to display the circle (stroke or fill)
-ctx.stroke(); // Draws the outline of the circle
+async function draw() {
+    await fetchNewWord();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawHangingGallow();
+    drawLetterPlaceholder();
+}
 
-// (Optional) Fill the circle with a color
-ctx.fillStyle = "red";
-ctx.fill();
+draw();
