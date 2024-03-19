@@ -2,7 +2,30 @@
 const rulesBtn = document.getElementById("showRulesBtn");
 const closeBtn = document.getElementById("closeRulesBtn");
 const rulesCarousel = document.getElementById("rulesCarousel");
-
+const darkModeBtn = document.getElementById("darkModeBtn");
+const darkModeBtnIcon = document.getElementById("darkModeBtnIcon");
+// Event Listener for Dark Mode
+darkModeBtn.addEventListener("click", () => {
+    const body = document.body;
+    if (body.classList.contains("dark-mode")) {
+        body.classList.remove("dark-mode");
+        rulesBtn.classList.remove("dark-mode");
+        darkModeBtn.classList.remove("dark-mode");
+        darkModeBtnIcon.classList.remove("dark-mode");
+        closeBtn.classList.remove("dark-mode");
+        rulesCarousel.classList.remove("dark-mode");
+        darkModeBtnIcon.src = "../assets/Moon and Stars.png";
+    } else {
+        body.classList.add("dark-mode");
+        rulesBtn.classList.add("dark-mode");
+        darkModeBtn.classList.add("dark-mode");
+        darkModeBtnIcon.classList.add("dark-mode");
+        closeBtn.classList.add("dark-mode");
+        rulesCarousel.classList.add("dark-mode");
+        darkModeBtnIcon.src = "../assets/Sun.png";
+    }
+    draw(); // Redraw the canvas
+});
 // Event Listeners
 rulesBtn.addEventListener("click", () => {
     rulesCarousel.classList.add("show"); // Add the 'show' class
@@ -63,28 +86,28 @@ for (let i = 0; i < brickRowCount; i++) {
     }
 }
 
-function drawBall() {
+function drawBall(color = "#0095dd") {
     ctx.beginPath();
     ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2);
-    ctx.fillStyle = "#0095dd";
+    ctx.fillStyle = color;
     ctx.fill();
     ctx.closePath();
 }
 
-function drawPaddle() {
+function drawPaddle(color = "#0095dd") {
     ctx.beginPath();
     ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h);
-    ctx.fillStyle = "#0095dd";
+    ctx.fillStyle = color;
     ctx.fill();
     ctx.closePath();
 }
 
-function drawBricks() {
+function drawBricks(color = "#0095dd") {
     bricks.forEach((column) => {
         column.forEach((brick) => {
             ctx.beginPath();
             ctx.rect(brick.x, brick.y, brick.width, brick.height);
-            ctx.fillStyle = brick.visible ? "#0095dd" : "transparent";
+            ctx.fillStyle = brick.visible ? color : "transparent";
             ctx.fill();
             ctx.closePath();
         });

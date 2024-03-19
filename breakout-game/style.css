@@ -7,17 +7,65 @@ body {
     justify-content: center;
     min-height: 100vh;
     margin: 0;
+    overflow: hidden; /* Added to remove overflow causing scroll bars */
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 10px;
+    z-index: 1; /* Ensure the header is above other elements */
+}
+
+body.dark-mode {
+    background-color: #0d374d;
+}
+
+body.dark-mode #gameCanvas {
+    background-color: #184e68;
 }
 
 #showRulesBtn {
-    position: absolute;
-    top: 10px;
-    left: 10px;
     padding: 8px 15px;
     background-color: #fff;
     color: #0095dd;
     border: none;
     border-radius: 5px;
+    margin-right: 10px; /* Added margin to separate buttons */
+}
+
+#showRulesBtn.dark-mode {
+    color: #0d374d;
+    background-color: #0095dd;
+}
+
+#darkModeBtn {
+    width: 40px;
+    height: 30px;
+    border: none;
+    margin-right: 10px; /* Added margin to separate buttons */
+    background-color: #f7f3f3;
+    border-radius: 15%;
+}
+
+#darkModeBtn.dark-mode {
+    background-color: #0095dd;
+}
+
+#darkModeBtnIcon {
+    width: 100%;
+    height: 100%;
+    background-color: #f7f3f3;
+}
+
+#darkModeBtnIcon.dark-mode {
+    background-color: #0095dd;
 }
 
 #rulesCarousel {
@@ -25,7 +73,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background: #fff;
+    background-color: #fff;
     color: #0095dd;
     min-height: 100vh;
     width: 400px;
@@ -35,6 +83,11 @@ body {
     transition: transform 0.3s ease-in-out; /* Transition effect */
 }
 
+#rulesCarousel.dark-mode {
+    background-color: #184e68;
+    color: #0095dd;
+}
+
 #closeRulesBtn {
     margin-top: 15px;
     background-color: #0095dd;
@@ -42,6 +95,10 @@ body {
     border: none;
     border-radius: 5px;
     padding: 8px 15px;
+}
+
+#closeRulesBtn.dark-mode {
+    color: #0d374d;
 }
 
 #gameCanvas {

@@ -7,18 +7,24 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <button id="showRulesBtn">Show Rules</button>
+        <header>
+            <button id="showRulesBtn">Show Rules</button>
 
-        <div id="rulesCarousel">
-            <h2>How To Play:</h2>
-            <p>
-                Use your right and left keys to move the paddle to bounce the
-                ball up and break the blocks.
-            </p>
-            <p>If you miss the ball, your score and the blocks will reset.</p>
-            <button id="closeRulesBtn">Close</button>
-        </div>
-
+            <button id="darkModeBtn">
+                <img id="darkModeBtnIcon" src="../assets/Moon and Stars.png" />
+            </button>
+            <div id="rulesCarousel">
+                <h2>How To Play:</h2>
+                <p>
+                    Use your right and left keys to move the paddle to bounce
+                    the ball up and break the blocks.
+                </p>
+                <p>
+                    If you miss the ball, your score and the blocks will reset.
+                </p>
+                <button id="closeRulesBtn">Close</button>
+            </div>
+        </header>
         <canvas id="gameCanvas" width="800" height="600"></canvas>
 
         <script src="script.js"></script>
